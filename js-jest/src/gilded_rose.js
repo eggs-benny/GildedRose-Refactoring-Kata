@@ -13,6 +13,11 @@ class Shop {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       switch (this.items[i].name) {
+        case 'Aged Brie':
+          this.items[i].sellIn --
+          this.items[i].quality ++
+          if (this.items[i].sellIn < 0) {this.items[i].quality ++}
+          break
         default:
           this.items[i].sellIn --
           this.items[i].quality --

@@ -39,20 +39,20 @@ describe('Gilded Rose', () => {
   });
 
   describe('Item: Aged Brie', () => {
-    xit('checks that ∆sellIn >0 === -1 x ∆quality', () => {
+    it('checks that ∆sellIn >0 === -1 x ∆quality', () => {
       const gildedRose = new Shop([new Item('Aged Brie', 2, 0)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Aged Brie');
       expect(items[0].sellIn).toBe(1);
       expect(items[0].quality).toBe(1);
     });
-    xit('checks that ∆sellIn <0 === -2 x ∆quality', () => {
+    it('checks that ∆sellIn <0 === -2 x ∆quality', () => {
       const gildedRose = new Shop([new Item('Aged Brie', -1, 4)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-2);
       expect(items[0].quality).toBe(6);
     });
-    xit('checks that quality !>50', () => {
+    it('checks that quality !>50', () => {
       const gildedRose = new Shop([new Item('Aged Brie', -24, 50)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-25);
