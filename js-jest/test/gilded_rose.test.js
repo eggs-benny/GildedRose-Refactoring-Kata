@@ -127,14 +127,14 @@ describe('Gilded Rose', () => {
   });
 
   describe('Item: Conjured Mana Cake', () => {
-    xit('checks (∆sellIn > 0 === 2x∆ quality)', () => {
+    it('checks (∆sellIn > 0 === 2x∆ quality)', () => {
       const gildedRose = new Shop([new Item('Conjured Mana Cake', 3, 6)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Conjured Mana Cake');
       expect(items[0].sellIn).toBe(2);
       expect(items[0].quality).toBe(4);
     });
-    xit('checks (∆sellIn < 0 === 2x∆ quality)', () => {
+    it('checks (∆sellIn < 0 === 2x∆ quality)', () => {
       const gildedRose = new Shop([new Item('Conjured Mana Cake', -1, 6)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Conjured Mana Cake');
@@ -142,7 +142,7 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(2);
     });
 
-    xit('checks that quality !<0', () => {
+    it('checks that quality !<0', () => {
       const gildedRose = new Shop([new Item('Conjured Mana Cake', -1, 0)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Conjured Mana Cake');

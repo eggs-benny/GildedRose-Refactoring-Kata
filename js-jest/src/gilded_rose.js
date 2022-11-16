@@ -18,6 +18,11 @@ class Shop {
           this.items[i].quality ++
           if (this.items[i].sellIn < 0) {this.items[i].quality ++}
           break
+        case 'Conjured Mana Cake':
+          this.items[i].sellIn --
+          this.items[i].quality -= 2
+          if (this.items[i].sellIn < 0) {this.items[i].quality -= 2}
+          break
         default:
           this.items[i].sellIn --
           this.items[i].quality --
