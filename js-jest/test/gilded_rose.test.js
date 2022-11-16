@@ -35,20 +35,20 @@ describe('Gilded Rose', () => {
   });
 
   describe('Item: Aged Brie', () => {
-    it('checks ∆sellIn is inverse to ∆quality when >0', () => {
+    it('checks that ∆sellIn >0 === -1 x ∆quality', () => {
       const gildedRose = new Shop([new Item('Aged Brie', 2, 0)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Aged Brie');
       expect(items[0].sellIn).toBe(1);
       expect(items[0].quality).toBe(1);
     });
-    it('checks ∆sellIn is inverse to 2x∆quality when <0', () => {
+    it('checks that ∆sellIn <0 === -2 x ∆quality', () => {
       const gildedRose = new Shop([new Item('Aged Brie', -1, 4)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-2);
       expect(items[0].quality).toBe(6);
     });
-    it('checks quality !>50', () => {
+    it('checks that quality !>50', () => {
       const gildedRose = new Shop([new Item('Aged Brie', -24, 50)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-25);
@@ -57,7 +57,7 @@ describe('Gilded Rose', () => {
   });
 
   describe('Item: Sulfuras, Hand of Ragnaros', () => {
-    it('checks regardless of n sellIn, quality = 80', () => {
+    it('checks that regardless of n sellIn, quality = 80', () => {
       const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', 1, 80), new Item('Sulfuras, Hand of Ragnaros', -1, 80), new Item('Sulfuras, Hand of Ragnaros', -400, 80)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Sulfuras, Hand of Ragnaros');
@@ -100,11 +100,36 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(0);
     });
 
-      it('checks that quality can`t be >50', () => {
+      it('checks that quality !>50', () => {
       const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 1, 50)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(50);
+    });
+  });
+
+  describe('Item: Conjured Mana Cake', () => {
+    it('checks (∆sellIn > 0 === 2x∆ quality)', () => {
+      const gildedRose = new Shop([new Item('Conjured Mana Cake', 3, 6)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Conjured Mana Cake');
+      expect(items[0].sellIn).toBe(2);
+      expect(items[0].quality).toBe(4);
+    });
+    it('checks (∆sellIn < 0 === 2x∆ quality)', () => {
+      const gildedRose = new Shop([new Item('Conjured Mana Cake', -1, 6)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Conjured Mana Cake');
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(2);
+    });
+
+    it('checks that quality !<0', () => {
+      const gildedRose = new Shop([new Item('Conjured Mana Cake', -1, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Conjured Mana Cake');
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(0);
     });
   });
 });
