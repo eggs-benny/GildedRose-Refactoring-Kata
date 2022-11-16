@@ -82,7 +82,6 @@ describe('Gilded Rose', () => {
     it('checks that 10 > ∆sellIn > 5 === 2x∆quality', () => {
       const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 9, 27)]);
       const items = gildedRose.updateQuality();
-      expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
       expect(items[0].sellIn).toBe(8);
       expect(items[0].quality).toBe(29);
     });
@@ -90,7 +89,6 @@ describe('Gilded Rose', () => {
     it('checks that 5 > ∆sellIn > 0 === 3x∆quality', () => {
       const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 4, 38)]);
       const items = gildedRose.updateQuality();
-      expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
       expect(items[0].sellIn).toBe(3);
       expect(items[0].quality).toBe(41);
     });
@@ -98,9 +96,15 @@ describe('Gilded Rose', () => {
     it('checks that ∆sellIn < 0 === 0 quality', () => {
       const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50)]);
       const items = gildedRose.updateQuality();
-      expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
       expect(items[0].sellIn).toBe(-1);
       expect(items[0].quality).toBe(0);
+    });
+
+      it('checks that quality can`t be >50', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 1, 50)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(50);
     });
   });
 });
