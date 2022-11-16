@@ -63,18 +63,12 @@ describe('Gilded Rose', () => {
   describe('Item: Sulfuras, Hand of Ragnaros', () => {
     it('checks that regardless of n sellIn, quality = 80', () => {
       const gildedRose = new Shop([
-        new Item('Sulfuras, Hand of Ragnaros', 1, 80),
-        new Item('Sulfuras, Hand of Ragnaros', -1, 80),
-        new Item('Sulfuras, Hand of Ragnaros', -400, 80),
+        new Item('Sulfuras, Hand of Ragnaros', 0, 80),
       ]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Sulfuras, Hand of Ragnaros');
-      expect(items[0].sellIn).toBe(1);
+      expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(80);
-      expect(items[1].sellIn).toBe(-1);
-      expect(items[1].quality).toBe(80);
-      expect(items[2].sellIn).toBe(-400);
-      expect(items[2].quality).toBe(80);
     });
   });
 
