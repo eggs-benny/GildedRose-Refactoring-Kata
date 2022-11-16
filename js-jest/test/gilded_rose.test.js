@@ -78,5 +78,13 @@ describe('Gilded Rose', () => {
       expect(items[0].sellIn).toBe(14);
       expect(items[0].quality).toBe(21);
     });
+
+    it('checks that 10 > ∆sellIn > 5 === 2x∆quality', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 9, 26)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
+      expect(items[0].sellIn).toBe(8);
+      expect(items[0].quality).toBe(28);
+    });
   });
 });
