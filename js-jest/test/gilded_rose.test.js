@@ -3,26 +3,26 @@ const { Shop, Item } = require('../src/gilded_rose');
 describe('Gilded Rose', () => {
   describe('Std Items(inc +5 Dexterity vest)', () => {
     // beforeEach(() => {});
-    xit('checks that ∆sellIn >0 === 1 x ∆quality', () => {
+    it('checks that ∆sellIn >0 === 1 x ∆quality', () => {
       const gildedRose = new Shop([new Item('+5 Dexterity Vest', 10, 20)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('+5 Dexterity Vest');
       expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(19);
     });
-    xit('checks that ∆sellIn <0 === 2 x ∆quality', () => {
+    it('checks that ∆sellIn <0 === 2 x ∆quality', () => {
       const gildedRose = new Shop([new Item('+5 Dexterity Vest', -1, 8)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-2);
       expect(items[0].quality).toBe(6);
     });
-    xit('checks quality !<0', () => {
+    it('checks quality !<0', () => {
       const gildedRose = new Shop([new Item('+5 Dexterity Vest', -10, 0)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-11);
       expect(items[0].quality).toBe(0);
     });
-    xit('checks elixir of the mongoose acts the same as +5DV', () => {
+    it('checks elixir of the mongoose acts the same as +5DV', () => {
       const gildedRose = new Shop([
         new Item('Elixir of the Mongoose', 10, 20),
         new Item('Elixir of the Mongoose', -1, 8),
@@ -69,11 +69,11 @@ describe('Gilded Rose', () => {
       ]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Sulfuras, Hand of Ragnaros');
-      expect(items[0].sellIn).toBe(1);
+      expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(80);
-      expect(items[1].sellIn).toBe(-1);
+      expect(items[1].sellIn).toBe(-2);
       expect(items[1].quality).toBe(80);
-      expect(items[2].sellIn).toBe(-400);
+      expect(items[2].sellIn).toBe(-401);
       expect(items[2].quality).toBe(80);
     });
   });
