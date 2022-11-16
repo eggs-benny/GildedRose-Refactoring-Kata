@@ -1,9 +1,9 @@
 const { Shop, Item } = require('../src/gilded_rose');
 
 describe('Gilded Rose', () => {
-  describe('Item: +5 Dexterity Vest', () => {
+  describe('Std Items(inc +5 Dexterity vest)', () => {
     // beforeEach(() => {});
-    it('checks qualities of +5 Dexterity Vest', () => {
+    it('checks +ve ∆sellIn & -ve ∆sellIn is proportional to quality, and that quality !<0', () => {
       const gildedRose = new Shop([
         new Item('+5 Dexterity Vest', 10, 20),
         new Item('+5 Dexterity Vest', -1, 8),
@@ -11,6 +11,20 @@ describe('Gilded Rose', () => {
       ]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('+5 Dexterity Vest');
+      expect(items[0].sellIn).toBe(9);
+      expect(items[0].quality).toBe(19);
+      expect(items[1].sellIn).toBe(-2);
+      expect(items[1].quality).toBe(6);
+      expect(items[2].sellIn).toBe(-11);
+      expect(items[2].quality).toBe(0);
+    });
+    it('checks elixir of the mongoose acts the same as +5DV', () => {
+      const gildedRose = new Shop([
+        new Item('Elixir of the Mongoose', 10, 20),
+        new Item('Elixir of the Mongoose', -1, 8),
+        new Item('Elixir of the Mongoose', -10, 0),
+      ]);
+      const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(19);
       expect(items[1].sellIn).toBe(-2);
