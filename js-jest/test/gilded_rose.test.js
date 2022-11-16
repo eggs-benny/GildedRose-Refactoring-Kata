@@ -3,20 +3,24 @@ const { Shop, Item } = require('../src/gilded_rose');
 describe('Gilded Rose', () => {
   describe('Std Items(inc +5 Dexterity vest)', () => {
     // beforeEach(() => {});
-    it('checks +ve ∆sellIn & -ve ∆sellIn is proportional to quality, and that quality !<0', () => {
-      const gildedRose = new Shop([
-        new Item('+5 Dexterity Vest', 10, 20),
-        new Item('+5 Dexterity Vest', -1, 8),
-        new Item('+5 Dexterity Vest', -10, 0),
-      ]);
+    it('checks that ∆sellIn >0 === 1 x ∆quality', () => {
+      const gildedRose = new Shop([new Item('+5 Dexterity Vest', 10, 20)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('+5 Dexterity Vest');
       expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(19);
-      expect(items[1].sellIn).toBe(-2);
-      expect(items[1].quality).toBe(6);
-      expect(items[2].sellIn).toBe(-11);
-      expect(items[2].quality).toBe(0);
+    });
+    it('checks that ∆sellIn <0 === 2 x ∆quality', () => {
+      const gildedRose = new Shop([new Item('+5 Dexterity Vest', -1, 8)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(6);
+    });
+    it('checks quality !<0', () => {
+      const gildedRose = new Shop([new Item('+5 Dexterity Vest', -10, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-11);
+      expect(items[0].quality).toBe(0);
     });
     it('checks elixir of the mongoose acts the same as +5DV', () => {
       const gildedRose = new Shop([
@@ -58,7 +62,11 @@ describe('Gilded Rose', () => {
 
   describe('Item: Sulfuras, Hand of Ragnaros', () => {
     it('checks that regardless of n sellIn, quality = 80', () => {
-      const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', 1, 80), new Item('Sulfuras, Hand of Ragnaros', -1, 80), new Item('Sulfuras, Hand of Ragnaros', -400, 80)]);
+      const gildedRose = new Shop([
+        new Item('Sulfuras, Hand of Ragnaros', 1, 80),
+        new Item('Sulfuras, Hand of Ragnaros', -1, 80),
+        new Item('Sulfuras, Hand of Ragnaros', -400, 80),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Sulfuras, Hand of Ragnaros');
       expect(items[0].sellIn).toBe(1);
@@ -72,7 +80,9 @@ describe('Gilded Rose', () => {
 
   describe('Item: Backstage passes to a TAFKAL80ETC concert', () => {
     it('checks that ∆sellIn > 10 === ∆quality', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)]);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
       expect(items[0].sellIn).toBe(14);
@@ -80,28 +90,36 @@ describe('Gilded Rose', () => {
     });
 
     it('checks that 10 > ∆sellIn > 5 === 2x∆quality', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 9, 27)]);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', 9, 27),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(8);
       expect(items[0].quality).toBe(29);
     });
 
     it('checks that 5 > ∆sellIn > 0 === 3x∆quality', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 4, 38)]);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', 4, 38),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(3);
       expect(items[0].quality).toBe(41);
     });
 
     it('checks that ∆sellIn < 0 === 0 quality', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50)]);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-1);
       expect(items[0].quality).toBe(0);
     });
 
-      it('checks that quality !>50', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 1, 50)]);
+    it('checks that quality !>50', () => {
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', 1, 50),
+      ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(50);
