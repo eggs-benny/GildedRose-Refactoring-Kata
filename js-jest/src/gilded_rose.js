@@ -12,19 +12,17 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
+      this.items[i].sellIn --
       switch (this.items[i].name) {
         case 'Aged Brie':
-          this.items[i].sellIn --
           this.items[i].quality ++
           if (this.items[i].sellIn < 0) {this.items[i].quality ++}
           break
         case 'Conjured Mana Cake':
-          this.items[i].sellIn --
           this.items[i].quality -= 2
           if (this.items[i].sellIn < 0) {this.items[i].quality -= 2}
           break
         case 'Backstage passes to a TAFKAL80ETC concert':
-          this.items[i].sellIn --
           this.items[i].quality ++
           if (this.items[i].sellIn < 10) {
             this.items[i].quality ++ 
@@ -33,7 +31,6 @@ class Shop {
           } if (this.items[i].sellIn < 0) {this.items[i].quality = 0}
           break
         default:
-          this.items[i].sellIn --
           this.items[i].quality --
           if (this.items[i].sellIn < 0) {this.items[i].quality -- }
           break
