@@ -7,7 +7,8 @@ When sellIn +ve, d sellIn = d quality
 Max qual = 50 (except sulfuras)
 
 "Aged Brie",                                   2,               0),
-                d sellIn = -d quality
+When sellIn +ve d sellIn = -d quality
+When sellIn -ve d sellIn = -2d quality
 
 "Elixir of the Mongoose",                      5,               7),
 Behaviour:
