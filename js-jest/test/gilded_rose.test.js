@@ -80,11 +80,19 @@ describe('Gilded Rose', () => {
     });
 
     it('checks that 10 > ∆sellIn > 5 === 2x∆quality', () => {
-      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 9, 26)]);
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 9, 27)]);
       const items = gildedRose.updateQuality();
       expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
       expect(items[0].sellIn).toBe(8);
-      expect(items[0].quality).toBe(28);
+      expect(items[0].quality).toBe(29);
+    });
+
+    it('checks that 5 > ∆sellIn > 0 === 3x∆quality', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 4, 38)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Backstage passes to a TAFKAL80ETC concert');
+      expect(items[0].sellIn).toBe(3);
+      expect(items[0].quality).toBe(41);
     });
   });
 });
