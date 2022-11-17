@@ -1,3 +1,5 @@
 /node_modules/
 /coverage/
 /notes/
+package-lock.json
+package.json
