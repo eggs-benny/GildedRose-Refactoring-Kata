@@ -1,7 +1,5 @@
-bin
-obj
-*.sln.DotSettings.user
-.vs
-vendor
-.idea
-*.iml
+/node_modules/
+/coverage/
+/notes/
+package-lock.json
+package.json
